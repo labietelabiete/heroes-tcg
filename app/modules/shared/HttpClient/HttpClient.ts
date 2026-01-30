@@ -9,7 +9,6 @@ export class HttpClient {
             ...options,
             headers: {
                 ...options?.headers,
-                'Access-Control-Allow-Origin': '*',
                 Authorization: `Bearer ${API_CONFIG.KEY}`
             }
         })
@@ -24,7 +23,6 @@ export class HttpClient {
     static async post<T>(endpoint: string, body: unknown, options?: RequestInit): Promise<T> {
         const url = `${API_CONFIG.URL}${endpoint}`
         const headers: HeadersInit = {
-            'Access-Control-Allow-Origin': '*',
             Authorization: `Bearer ${API_CONFIG.KEY}`,
             ...options?.headers
         }
@@ -58,7 +56,6 @@ export class HttpClient {
             headers: {
                 'Content-Type': 'application/json',
                 ...options?.headers,
-                'Access-Control-Allow-Origin': '*',
                 Authorization: `Bearer ${API_CONFIG.KEY}`
             }
         })
