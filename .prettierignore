@@ -1,0 +1,6 @@
+.next
+.yalc
+coverage
+node_modules
+out
+dist
