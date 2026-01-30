@@ -1,0 +1,5 @@
+__mocks__/
+.cache/
+.scannerwork/
+node_modules/
+public
