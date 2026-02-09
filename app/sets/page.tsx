@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { getSetUseCase } from '../modules/set'
+import { getAllSetsUseCase, getSetUseCase } from '../modules/set'
 
 export default function SetsPage() {
     const [sets, setSets] = React.useState([])
@@ -15,8 +15,18 @@ export default function SetsPage() {
         })
     }
 
+    const fetchSets = async () => {
+        await getAllSetsUseCase({
+            successCallback: (response) => {
+                console.log('Sets fetched successfully:', response)
+                setSets(response)
+            }
+        })
+    }
+
     React.useEffect(() => {
         fetchSet()
+        fetchSets()
     }, [])
 
     return (

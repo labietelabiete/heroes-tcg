@@ -1,5 +1,6 @@
 import { GetSetRequest } from '../../application'
 
 export const ENDPOINTS = {
-    GET_SET: (request: GetSetRequest) => `/sets/${request.setId}`
+    GET_SET: (request: GetSetRequest) => `/sets/${request.setId}`,
+    GET_SETS: () => `/sets`
 }
