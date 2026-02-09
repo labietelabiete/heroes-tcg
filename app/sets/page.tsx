@@ -1,30 +1,32 @@
 'use client'
 
 import React from 'react'
+import { Set, getAllSetsUseCase, getSetUseCase } from '../modules/set'
 
 export default function SetsPage() {
-    const [sets, setSets] = React.useState([])
+    const [sets, setSets] = React.useState<Set[]>([])
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL
-    const apiKey = process.env.NEXT_PUBLIC_API_KEY
+    const fetchSet = async () => {
+        const set = await getSetUseCase({
+            request: { setId: 'base1' },
+            successCallback: (response) => {
+                console.log('Set fetched successfully:', response)
+            }
+        })
+    }
 
-    const fetchData = () => {
-        const myHeaders = new Headers()
-        myHeaders.append('Authorization', 'Bearer' + apiKey)
-        const url = apiUrl + '/sets'
-        const requestOptions: RequestInit = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow' as RequestRedirect
-        }
-        fetch(url, requestOptions)
-            .then((response) => response.text())
-            .then((result) => setSets(JSON.parse(result).data))
-            .catch((error) => console.log('error', error))
+    const fetchSets = async () => {
+        await getAllSetsUseCase({
+            successCallback: (response) => {
+                console.log('Sets fetched successfully:', response)
+                setSets(response)
+            }
+        })
     }
 
     React.useEffect(() => {
-        fetchData()
+        // fetchSet()
+        fetchSets()
     }, [])
 
     return (
@@ -33,7 +35,7 @@ export default function SetsPage() {
             {sets.map((set: any) => (
                 <div key={set.id}>
                     <div>{set.name}</div>
-                    <img className='w-50 mb-[100px]' src={set.images?.logo} alt={set.name} />
+                    <img className='w-50 mb-[100px]' src={set.logo} alt={set.name} />
                 </div>
             ))}
         </>
