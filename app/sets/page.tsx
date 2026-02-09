@@ -6,27 +6,9 @@ import { getSetUseCase } from '../modules/set'
 export default function SetsPage() {
     const [sets, setSets] = React.useState([])
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL
-    const apiKey = process.env.NEXT_PUBLIC_API_KEY
-
-    const fetchData = () => {
-        const myHeaders = new Headers()
-        myHeaders.append('Authorization', 'Bearer' + apiKey)
-        const url = apiUrl + '/sets'
-        const requestOptions: RequestInit = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow' as RequestRedirect
-        }
-        fetch(url, requestOptions)
-            .then((response) => response.text())
-            .then((result) => setSets(JSON.parse(result).data))
-            .catch((error) => console.log('error', error))
-    }
-
     const fetchSet = async () => {
         const set = await getSetUseCase({
-            request: { setId: 'xy1' },
+            request: { setId: 'base1' },
             successCallback: (response) => {
                 console.log('Set fetched successfully:', response)
             }
@@ -34,7 +16,6 @@ export default function SetsPage() {
     }
 
     React.useEffect(() => {
-        // fetchData()
         fetchSet()
     }, [])
 

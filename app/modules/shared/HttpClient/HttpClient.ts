@@ -9,7 +9,7 @@ export class HttpClient {
             ...options,
             headers: {
                 ...options?.headers,
-                Authorization: `Bearer ${API_CONFIG.KEY}`
+                'X-Api-Key': API_CONFIG.KEY
             }
         })
 
@@ -23,7 +23,7 @@ export class HttpClient {
     static async post<T>(endpoint: string, body: unknown, options?: RequestInit): Promise<T> {
         const url = `${API_CONFIG.URL}${endpoint}`
         const headers: HeadersInit = {
-            Authorization: `Bearer ${API_CONFIG.KEY}`,
+            'X-Api-Key': API_CONFIG.KEY,
             ...options?.headers
         }
 
@@ -56,7 +56,7 @@ export class HttpClient {
             headers: {
                 'Content-Type': 'application/json',
                 ...options?.headers,
-                Authorization: `Bearer ${API_CONFIG.KEY}`
+                'X-Api-Key': API_CONFIG.KEY
             }
         })
 
