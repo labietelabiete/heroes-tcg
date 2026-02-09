@@ -22,15 +22,19 @@ export class HttpClient {
 
     static async post<T>(endpoint: string, body: unknown, options?: RequestInit): Promise<T> {
         const url = `${API_CONFIG.URL}${endpoint}`
-        const headers: HeadersInit = {
+        const headers: Record<string, string> = {
             'X-Api-Key': API_CONFIG.KEY,
-            ...options?.headers
+            ...(options?.headers as Record<string, string>)
         }
 
-        let processedBody = body
-        if (!(body instanceof FormData)) {
+        let processedBody: BodyInit | null | undefined
+        if (body instanceof FormData) {
+            processedBody = body
+        } else if (body !== undefined && body !== null) {
             processedBody = JSON.stringify(body)
             headers['Content-Type'] = 'application/json'
+        } else {
+            processedBody = undefined
         }
 
         const response = await fetch(url, {

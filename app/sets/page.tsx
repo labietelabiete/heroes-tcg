@@ -1,10 +1,10 @@
 'use client'
 
 import React from 'react'
-import { getAllSetsUseCase, getSetUseCase } from '../modules/set'
+import { Set, getAllSetsUseCase, getSetUseCase } from '../modules/set'
 
 export default function SetsPage() {
-    const [sets, setSets] = React.useState([])
+    const [sets, setSets] = React.useState<Set[]>([])
 
     const fetchSet = async () => {
         const set = await getSetUseCase({
@@ -25,7 +25,7 @@ export default function SetsPage() {
     }
 
     React.useEffect(() => {
-        fetchSet()
+        // fetchSet()
         fetchSets()
     }, [])
 
@@ -35,7 +35,7 @@ export default function SetsPage() {
             {sets.map((set: any) => (
                 <div key={set.id}>
                     <div>{set.name}</div>
-                    <img className='w-50 mb-[100px]' src={set.images?.logo} alt={set.name} />
+                    <img className='w-50 mb-[100px]' src={set.logo} alt={set.name} />
                 </div>
             ))}
         </>

@@ -1,23 +1,42 @@
 export interface SetData {
     id: string
     name: string
-    series: string
-    printedTotal: number
-    total: number
-    legalities: SetLegalitiesData
-    ptcgoCode: string | null
-    releaseDate: string
-    updatedAt: string
-    images: SetImagesData
-}
-
-interface SetImagesData {
-    symbol: string
     logo: string
+    cardCount: CardCountSetData
+    cards?: CardSetData[]
+    releaseDate?: string
+    serie?: SerieSetData
+    legal?: LegalSetData
+    tcgOnline?: string
+    abbreviation?: AbbreviationSetData
 }
 
-interface SetLegalitiesData {
-    unlimited: string
-    standard: string
-    expanded: string
+export interface CardCountSetData {
+    total: number
+    official: number
+    firstEd?: number
+    holo?: number
+    normal?: number
+    reverse?: number
+}
+
+export interface CardSetData {
+    id: string
+    image: string
+    localId: string
+    name: string
+}
+
+export interface SerieSetData {
+    id: string
+    name: string
+}
+
+export interface LegalSetData {
+    expanded: boolean
+    standard: boolean
+}
+
+export interface AbbreviationSetData {
+    official: string
 }

@@ -1,17 +1,13 @@
 import { Set } from '../../domain'
 import { SetData } from '../dataObjects/SetData'
+import { getSetLogoUrl } from '@/app/modules/shared/utils/set'
 
 export function setDataToSet(data: SetData): Set {
     return {
         id: data.id,
         name: data.name,
-        series: data.series,
-        printedTotal: data.printedTotal,
-        total: data.total,
-        releaseDate: data.releaseDate ?? '',
-        images: {
-            symbol: data.images.symbol ?? '',
-            logo: data.images?.logo ?? ''
-        }
+        logo: getSetLogoUrl(data.logo),
+        releaseDate: data?.releaseDate,
+        serie: data.serie?.name
     }
 }
