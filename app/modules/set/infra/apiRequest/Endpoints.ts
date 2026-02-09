@@ -2,5 +2,5 @@ import { GetSetRequest } from '../../application'
 
 export const ENDPOINTS = {
     GET_SET: (request: GetSetRequest) => `/sets/${request.setId}`,
-    GET_SETS: () => `/sets`
+    GET_ALL_SETS: '/sets'
 }

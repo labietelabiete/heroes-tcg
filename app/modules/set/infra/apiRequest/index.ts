@@ -1,2 +1,2 @@
 export * from './getSet'
-export * from './getSets'
+export * from './getAllSets'

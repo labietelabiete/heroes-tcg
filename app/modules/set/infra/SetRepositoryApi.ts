@@ -8,6 +8,6 @@ export const SetRepositoryApi: SetRepository = {
     },
 
     async getAll() {
-        return REQUESTS.getSets()
+        return REQUESTS.getAllSets()
     }
 }

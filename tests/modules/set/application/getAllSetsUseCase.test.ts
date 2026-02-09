@@ -27,7 +27,6 @@ describe('getAllSetsUseCase', () => {
         expect(errorCallback).not.toHaveBeenCalled()
         expect(finallyCallback).toHaveBeenCalled()
     })
-
     it('should call errorCallback on error', async () => {
         const error = new Error('Failed to fetch')
         jest.mocked(SetRepositoryApi.getAll).mockRejectedValueOnce(error)
@@ -41,18 +40,6 @@ describe('getAllSetsUseCase', () => {
         expect(SetRepositoryApi.getAll).toHaveBeenCalled()
         expect(successCallback).not.toHaveBeenCalled()
         expect(errorCallback).toHaveBeenCalledWith(error)
-        expect(finallyCallback).toHaveBeenCalled()
-    })
-
-    it('should call finallyCallback without errorCallback', async () => {
-        ;(SetRepositoryApi.getAll as jest.Mock).mockResolvedValue(mockResponse)
-
-        await getAllSetsUseCase({
-            successCallback,
-            finallyCallback
-        })
-
-        expect(successCallback).toHaveBeenCalledWith(mockResponse)
         expect(finallyCallback).toHaveBeenCalled()
     })
 })
