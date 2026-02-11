@@ -22,9 +22,9 @@ export interface CardCountSetData {
 
 export interface CardSetData {
     id: string
-    image: string
     localId: string
     name: string
+    image: string
 }
 
 export interface SerieSetData {

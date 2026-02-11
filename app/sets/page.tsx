@@ -1,19 +1,13 @@
 'use client'
 
 import React from 'react'
-import { Set, getAllSetsUseCase, getSetUseCase } from '../modules/set'
+
+import Link from 'next/link'
+
+import { Set, getAllSetsUseCase } from '@/app/modules/set'
 
 export default function SetsPage() {
     const [sets, setSets] = React.useState<Set[]>([])
-
-    const fetchSet = async () => {
-        const set = await getSetUseCase({
-            request: { setId: 'base1' },
-            successCallback: (response) => {
-                console.log('Set fetched successfully:', response)
-            }
-        })
-    }
 
     const fetchSets = async () => {
         await getAllSetsUseCase({
@@ -25,19 +19,20 @@ export default function SetsPage() {
     }
 
     React.useEffect(() => {
-        // fetchSet()
         fetchSets()
     }, [])
 
     return (
         <>
-            <div className='text-2xl font-bold mb-4'>Sets Page</div>
-            {sets.map((set: any) => (
-                <div key={set.id}>
-                    <div>{set.name}</div>
-                    <img className='w-50 mb-[100px]' src={set.logo} alt={set.name} />
-                </div>
-            ))}
+            <div className='text-2xl font-bold mb-8'>Sets Page</div>
+            <div className='flex gap-12 flex-wrap'>
+                {sets.map((set: Set) => (
+                    <Link key={set.id} href={`/sets/${set.id}`}>
+                        <div>{set.name}</div>
+                        <img className='w-50 mb-[100px]' src={set.logo} alt={set.name} />
+                    </Link>
+                ))}
+            </div>
         </>
     )
 }
