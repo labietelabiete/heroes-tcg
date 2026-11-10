@@ -26,7 +26,7 @@ export default function SetDetailPage() {
         if (id) fetchSet()
     }, [id])
 
-    if (!set) return <div>Loading...</div>
+    if (!set) return <div>Loading page...</div>
 
     return (
         <>
